@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="estilo.css" media="screen"/>
+    <title>Document</title>
+
+    <script type="text/javascript">
+        function Churras(){
+            var homens = parseInt(document.getElementById("m").value);
+            var mulheres = parseInt(document.getElementById("f").value);
+            var crianca = parseInt(document.getElementById("c").value);
+            
+            var qtd_carne = ( (homens * 450) + (mulheres * 300) + (crianca * 200) )/1000;
+            var tipos_carne = 0, x, inputs = document.getElementsByTagName('input');
+            var qtd_cerveja_litrao = 0, qtd_cerveja_lata = 0, qtd_refri = 0, qtd_suco = 0;
+            
+            for(x=0;x<inputs.length;x++){
+                if(inputs[x].type=='checkbox'){
+                    if(inputs[x].checked==true){
+                        if(inputs[x].id == 'alc' || inputs[x].id == 'ctf' || inputs[x].id == 'cf' || inputs[x].id == 'fral' ||
+                        inputs[x].id == 'lf' || inputs[x].id == 'ls' || inputs[x].id == 'pic' || inputs[x].id == 'sbx')
+                            tipos_carne++;
+                    }
+                }
+            }
+
+            for(x=0;x<inputs.length;x++){
+                if(inputs[x].type=='checkbox'){
+                    if(inputs[x].id == 'bebida-cervejal'){
+                        if(inputs[x].checked==true){
+                            qtd_cerveja_litrao = homens + mulheres;
+                        }
+                    }
+                    
+                    if(inputs[x].id == 'bebida-cervejalt'){
+                        if(inputs[x].checked==true){
+                            qtd_cerveja_lata = (homens + mulheres) * 4;
+                        }
+                    }
+
+                    if(inputs[x].id == 'bebida-refri'){
+                        if(inputs[x].checked==true){
+                            qtd_refri = homens + mulheres + crianca;
+                        }
+                    }
+
+                    if(inputs[x].id == 'bebida-suco'){
+                        if(inputs[x].checked==true){
+                            qtd_suco = homens + mulheres + crianca;
+                        }
+                    }
+
+                }
+            }
+            
+            for(x=0;x<inputs.length;x++){
+                if(inputs[x].type=='checkbox'){
+                    if(inputs[x].checked==true && inputs[x].id == 'alc'){
+                        document.getElementById("carne1").innerHTML = "Alcatra: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                    if(inputs[x].checked==true && inputs[x].id == 'ctf'){
+                        document.getElementById("carne2").innerHTML = "Contra Filé: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                    if(inputs[x].checked==true && inputs[x].id == 'cf'){
+                        document.getElementById("carne3").innerHTML = "Coração de frango: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                    if(inputs[x].checked==true && inputs[x].id == 'fral'){
+                        document.getElementById("carne4").innerHTML = "Fraldinha: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                    if(inputs[x].checked==true && inputs[x].id == 'lf'){
+                        document.getElementById("carne5").innerHTML = "Linguiça de Frango: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                    if(inputs[x].checked==true && inputs[x].id == 'ls'){
+                        document.getElementById("carne6").innerHTML = "Linguiça suína: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                    if(inputs[x].checked==true && inputs[x].id == 'pic'){
+                        document.getElementById("carne7").innerHTML = "Picanha: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                    if(inputs[x].checked==true && inputs[x].id == 'sbx'){
+                        document.getElementById("carne8").innerHTML = "Sobrecoxa: " + (qtd_carne/tipos_carne) + " kg";
+                    }
+
+                }
+            }
+            
+            if(qtd_cerveja_litrao != 0)
+                document.getElementById("litrao").innerHTML = "Cerveja litrão: " + qtd_cerveja_litrao + " litros";
+            if(qtd_cerveja_lata != 0)
+                document.getElementById("lata").innerHTML = "Cerveja lata: " + qtd_cerveja_lata + " latas";
+            if(qtd_refri != 0)
+                document.getElementById("refri").innerHTML = "Refrigerante: " + qtd_refri + " litros";
+            if(qtd_suco != 0)
+                document.getElementById("suco").innerHTML = "Suco: " + qtd_suco + " litros";
+        }
+    </script>
+</head>
+<body>
+
+    <div>
+        <h2>Calculadora de Churrasco</h2>
+
+        Homens:  <input type="text" id="m"><br>
+        Mulheres: <input type="text" id="f"><br>
+        Crianças:  <input type="text" id="c"><br>
+        
+        <p>Carnes:</p>
+        <input type="checkbox" id="alc">Alcatra<br>
+        <input type="checkbox" id="ctf">Contra-filé<br>
+        <input type="checkbox" id="cf">Coração de frango<br>
+        <input type="checkbox" id="fral">Fraldinha<br>
+        <input type="checkbox" id="lf">Linguiça de frango<br>
+        <input type="checkbox" id="ls">Linguiça suína<br>
+        <input type="checkbox" id="pic">Picanha<br>
+        <input type="checkbox" id="sbx">Sobrecoxa<br>
+
+        <p>Bebidas:</p>
+        <input type="checkbox" id="bebida-cervejal">Cerveja litrão<br>
+        <input type="checkbox" id="bebida-cervejalt">Cerveja lata<br>
+        <input type="checkbox" id="bebida-refri">Refrigerante<br>
+        <input type="checkbox" id="bebida-suco">Suco<br>
+
+        <p id="carnee">Quantidade de Carnes: </p>
+        <p id="carne1"></p>
+        <p id="carne2"></p>
+        <p id="carne3"></p>
+        <p id="carne4"></p>
+        <p id="carne5"></p>
+        <p id="carne6"></p>
+        <p id="carne7"></p>
+        <p id="carne8"></p>
+        <p>Quantidade de bebidas: </p>
+        <p id="litrao"></p>
+        <p id="lata"></p>
+        <p id="refri"></p>
+        <p id="suco"></p>
+        <button type="button" onclick="Churras()">Preparar</button>
+    </div>
+</body>
+</html>
